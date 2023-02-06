@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Autorzy{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_autor_add') }}"><button>Nowy autor</button></a>
+    <h2>Autorzy</h2>
+    <table>
+        <thead>
+            <tr><th>Imię</th><th>Nazwisko</th><th></th></tr>
+        </thead>
+        <tbody>
+            {% for author in authors_array %}
+                <tr><td>{{ author.imie }}</td><td>{{ author.nazwisko }}</td><td><td><a href="{{ path('author_details', {autorId: author.id}) }}"><button>Szczegóły</button></a></td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Popularni autorzy</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Autor</th>
+                <th>L. wypożyczeń</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author in popularni_autorzy %}
+                <tr>
+                    <td>{{ author.autor }}</td>
+                    <td>{{ author.l_wypozyczen }}</td>
+                    <td>
+                        <a href="{{ path('author_details', {autorId: author.id}) }}">
+                            <button>Szczegóły</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

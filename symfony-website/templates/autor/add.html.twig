@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nowy autor{% endblock %}
+
+{% block body %}
+    {# <a href="{{ path('app_autor') }}"><button>Powrót do autorów</button></a>#}
+    {{ form(add_author_form) }}
+{% endblock %}

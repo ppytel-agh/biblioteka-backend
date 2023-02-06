@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Egzemplarze pozycji{% endblock %}
+
+{% block body %}
+    <h1>Pozycja: {{ pozycja.tytul }}</h1>
+    <a href="{{ path('egzemplarz_rejetracja', {pozycjaISBN: pozycja.isbn}) }}"><button>rejestracja egzemplarzy</button></a>
+    <h2>Egzemplarze w zbiorach</h2>
+    <table>
+        {% for egzemplarz in egzemplarze %}
+            <tr><td>{{ egzemplarz.numer }}</td><td>{{ egzemplarz.data_nabycia }}</td><td><a href="{{ path('egzemplarz_details', {egzemplarzId: egzemplarz.numer}) }}"><button>Szczegóły</button></a></td></tr>
+        {% endfor %}
+    </table>
+{% endblock %}

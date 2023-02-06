@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Autor{% endblock %}
+
+{% block body %}
+    <h1>Autor: {{ info.imie }} {{ info.nazwisko }}</h1>
+    <a href="{{ path('app_author_add_book', {autorId: autor_id}) }}"><button>Dodaj pozycję</button></a>
+    <h2>Wydane książki</h2>
+    <table>
+        <thead>
+        <tr><th>Tytuł</th><th>data wydania</th><th>ISBN</th></tr>
+        </thead>
+        <tbody>
+        {% for pozycja in pozycje %}
+            <tr><td>{{ pozycja.tytul }}</td><td>{{ pozycja.data_wydania }}</td><td><td>{{ pozycja.isbn }}</td><td><a href="{{ path('egzemplarze', {pozycjaISBN: pozycja.isbn}) }}"><button>Egzemplarze</button></a></td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

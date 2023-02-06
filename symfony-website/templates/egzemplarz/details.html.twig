@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Egzemplarz{% endblock %}
+
+{% block body %}
+    <h2>Egzemplarz: {{ egzemplarz_id }}, tytuł: {{ egzemplarz.tytul }}, autor: {{ egzemplarz.autor }}</h2>
+    {% if aktualne is null %}
+        <a href="{{ path('egzemplarz_wypozycz', {egzemplarzId: egzemplarz_id}) }}"><button>Wypożycz</button></a>
+    {% else %}
+        <h2>Aktualne wypożyczenie</h2>
+        <table>
+            <tr>
+                <td>{{ aktualne.czytelnik_id }}</td>
+                <td>{{ aktualne.data_wypozyczenia }}</td>
+                <td><a href="{{ path('wypozyczenie_zwrot', {wypozyczenieId: aktualne.id}) }}"><button>Zwróć</button></a></td>
+            </tr>
+        </table>
+    {% endif %}
+    <h2>Historia wypozyczeń</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Czytelnik</th>
+                <th>Data wypożyczenia</th>
+                <th>Data zwrotu</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for wypozyczenie in historia %}
+                <tr>
+                    <td>
+                        {{ wypozyczenie.czytelnik_id }}
+                    </td>
+                    <td>
+                        {{ wypozyczenie.data_wypozyczenia }}
+                    </td>
+                    <td>
+                        {{ wypozyczenie.data_zwrotu }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

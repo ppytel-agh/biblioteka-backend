@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nowa pozycja autora{% endblock %}
+
+{% block body %}
+    <h1>Nowa pozycja autora {{ info.imie }} {{ info.nazwisko }}</h1>
+    {{ form(add_book_form) }}
+{% endblock %}

@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+
+    symfony:
+        image: symfonyserver
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        container_name: symfony
+        working_dir: /home/project
+        volumes:
+            - .:/home/project
+        ports:
+            - "8080:8000"
+            
+    baza:
+        image: postgres:11
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: u0pytel
+            POSTGRES_PASSWORD: dupa
+            POSTGRES_DB: u0pytel
+    
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+          - 8081:8080
+        
+      

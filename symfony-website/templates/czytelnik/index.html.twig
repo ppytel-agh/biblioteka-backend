@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Czytelnicy{% endblock %}
+
+{% block body %}
+    <a href="{{ path('czytelnik_dodaj') }}"><button>Dodaj czytelnika</button></a>
+    <table>
+        {% for czytelnik in czytelnicy %}
+            <tr><td>{{ czytelnik.numer_karty }}</td><td><a href="{{ path('czytelnik_details', {numerKarty: czytelnik.numer_karty}) }}"><button>Szczegóły</button></a></td></tr>
+        {% endfor %}
+    </table>
+{% endblock %}

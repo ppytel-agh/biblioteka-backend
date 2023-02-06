@@ -1,0 +1,8 @@
+{%extends'base.html.twig'%}
+
+{%block title%}Wypożyczenie{%endblock%}
+
+{%block body%}
+    <h2>Egzemplarz: {{ numer_egzemplarza }}</h2>
+    {{ form(wypozyczenie_form) }}
+{%endblock%}

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zbiory{% endblock %}
+
+{% block body %}
+    <h2>Dostępne tytuły</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ISBN</th>
+                <th>Tytuł</th>
+                <th>Autor</th>
+                <th>L. dostępnych egzemplarzy</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dostepny_tytul in dostepne_tytuly %}
+                <tr>
+                    <td>{{ dostepny_tytul.isbn }}</td>
+                    <td>{{ dostepny_tytul.tytul }}</td>
+                    <td>{{ dostepny_tytul.autor }}</td>
+                    <td>{{ dostepny_tytul.l_egzemplarzy }}</td>
+                    <td>
+                        <a href="{{ path('egzemplarze', {pozycjaISBN: dostepny_tytul.isbn}) }}">
+                            <button>Egzemplarze</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>Niezwrócone egzemplarze</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>tytuł</th>
+                <th>numer egzemplarza</th>
+                <th>Czytelnik</th>
+                <th>Data wypożyczenia</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for niezwrocony in niezwrocone %}
+                <tr>
+                    <td>{{ niezwrocony.tytul }}</td>
+                    <td>{{ niezwrocony.egzemplarz }}</td>
+                    <td>{{ niezwrocony.numer_karty }}</td>
+                    <td>{{ niezwrocony.data_wypozyczenia }}</td>
+                    <td><a href="{{ path('wypozyczenie_zwrot', {wypozyczenieId: niezwrocony.wypozyczenie_id}) }}"><button>Zwrot</button></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

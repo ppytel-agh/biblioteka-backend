@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rejestracja egzemplarzy{% endblock %}
+
+{% block body %}
+    <h2>Pozycja: {{ pozycja.tytul }}</h2>
+    {{ form(rejestracja_form) }}
+{% endblock %}

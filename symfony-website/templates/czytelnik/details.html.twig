@@ -1,0 +1,50 @@
+{%extends'base.html.twig'%}
+
+{%block title%}Czytelnik{%endblock%}
+
+{%block body%}
+    <h1>Numer karty: {{ numer_karty }}</h1>
+    {% if czy_ban %}
+        Czytelnik nie może aktualnie wypożyczać książek.
+        <a href="{{ path('czytelik_odbanuj', {numerKarty: numer_karty}) }}"><button>Odbanuj</button></a>
+    {% else %}
+        Czytelnik ma prawo wypożyczać książki.
+        <a href="{{  path('czytelik_banuj', {numerKarty: numer_karty}) }}"><button>Banuj</button></a>
+    {% endif %}
+    <div>
+        <h2>Aktualne wypożyczenia</h2>
+        <table>
+            {% for do_zwrotu_el in do_zwrotu %}
+                <tr>
+                    <td>{{ do_zwrotu_el.tytul }}</td>
+                    <td>{{ do_zwrotu_el.egzemplarz }}</td>
+                    <td>{{ do_zwrotu_el.data_wypozyczenia }}</td>
+                    <td><a href="{{ path('wypozyczenie_zwrot', {wypozyczenieId: do_zwrotu_el.wypozyczenie_id}) }}"><button>Zwróć</button></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <h2>Historia wypożyczeń</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data wypożyczenia</th>
+                    <th>Data zwrotu</th>
+                    <th>Egzemplarz</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for wypozyczenie in historia_wypozyczen %}
+                    <tr>
+                        <td>{{ wypozyczenie.data_wypozyczenia }}</td>
+                        <td>{{ wypozyczenie.data_zwrotu }}</td>
+                        <td>
+                            <a href="{{ path('egzemplarz_details', {egzemplarzId: wypozyczenie.egzemplarz_id}) }}">
+                                <button>{{ wypozyczenie.egzemplarz_id }}</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{%endblock%}
